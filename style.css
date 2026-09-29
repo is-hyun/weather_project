@@ -1,0 +1,111 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  color: #333;
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+}
+
+.layout {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+#input-form {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+#city-input {
+  flex: 1;
+  height: 46px;
+  padding: 0 15px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+#city-input:focus {
+  border-color: #4a90e2;
+}
+
+#submitBtn {
+  height: 46px;
+  padding: 0 20px;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  white-space: nowrap;
+}
+
+#submitBtn:hover {
+  background-color: #357abd;
+}
+
+#weather-result {
+  margin-top: 0;
+  text-align: center;
+  color: #666;
+  font-size: 15px;
+}
+
+#weather-result:not(:empty) {
+  margin-top: 20px;
+}
+
+#weather-result h3 {
+  font-size: 20px;
+  color: #2c3e50;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+#weather-result ul {
+  list-style: none;
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #e9ecef;
+  text-align: left;
+}
+
+#weather-result li {
+  font-size: 15px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  color: #555;
+}
+
+#weather-result li:last-child {
+  margin-bottom: 0;
+}
+
+#weather-result li strong {
+  color: #2c3e50;
+}
