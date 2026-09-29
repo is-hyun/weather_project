@@ -5,11 +5,7 @@ const inputForm = document.getElementById("input-form");
 const cityInput = document.getElementById("city-input");
 const weatherResult = document.getElementById("weather-result");
 
-// =======================================
-// 1. 지역 검색 함수 (Geocoding API)
-// =======================================
 async function getLocation(cityName) {
-  // 1) 특별시, 광역시 등을 영문으로 안전하게 변환해 주는 맵 (기존 유지)
   const cityMap = {
     서울: "seoul",
     울산: "ulsan",
@@ -22,18 +18,14 @@ async function getLocation(cityName) {
     전주: "jeonju",
   };
 
-  // 검색 시도할 쿼리 목록을 담을 배열
   let searchQueries = [];
 
-  // 만약 cityMap에 있는 특별시/광역시라면 그 값을 최우선으로 넣음
   if (cityMap[cityName]) {
     searchQueries.push(cityMap[cityName]);
   }
 
-  // 입력어 자체를 다음 순서로 추가
   searchQueries.push(cityName);
 
-  // 만약 입력어에 이미 행정구역 접미사가 없다면 '시'를 붙인 버전도 검색 후보에 추가
   const suffixes = ["시", "군", "구", "도", "특별시", "광역시"];
   const hasSuffix = suffixes.some((suffix) => cityName.endsWith(suffix));
 
@@ -43,7 +35,6 @@ async function getLocation(cityName) {
 
   let locationData = null;
 
-  // 준비된 검색어들로 순서대로 API 요청 시도 (중복 제거)
   const uniqueQueries = [...new Set(searchQueries)];
 
   for (const query of uniqueQueries) {
@@ -58,7 +49,7 @@ async function getLocation(cityName) {
 
     if (data.results && data.results.length > 0) {
       locationData = data.results[0];
-      break; // 찾으면 바로 반복문 탈출
+      break;
     }
   }
 
@@ -69,9 +60,6 @@ async function getLocation(cityName) {
   return locationData;
 }
 
-// =======================================
-// 2. 날씨 정보 조회 함수 (Forecast API)
-// =======================================
 async function getWeather(latitude, longitude) {
   const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,apparent_temperature,precipitation_probability,wind_speed_10m&timezone=auto`;
   const response = await fetch(url);
@@ -89,9 +77,6 @@ async function getWeather(latitude, longitude) {
   return data.current;
 }
 
-// =======================================
-// 3. 화면 출력 함수
-// =======================================
 function DisplayResult(location, weather) {
   weatherResult.innerHTML = `
     <h3>${location.name} (${location.country || ""})</h3>
@@ -104,9 +89,6 @@ function DisplayResult(location, weather) {
   `;
 }
 
-// =======================================
-// 4. 이벤트 리스너 등록
-// =======================================
 inputForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
